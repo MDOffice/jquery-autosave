@@ -1,5 +1,6 @@
 var Autosave = Autosave || {};
 Autosave.storageName = 'autosave';
+Autosave.onPage = false;
 
 Autosave._setItem = function (that) {
     var items = Autosave._getFullItem(),
@@ -19,6 +20,7 @@ Autosave._setItem = function (that) {
     if (!found) {
         items.push({"id": formId, "i": index, "text": text, "reset": false});
     }
+    Autosave.onPage = text != '';
 
     window.localStorage.setItem(Autosave.storageName, JSON.stringify(items));
 };
@@ -55,7 +57,9 @@ Autosave.bind = function (e) {
 };
 Autosave.restore = function () {
     if (this.value == '') {
-        this.value = Autosave._getText(this, true);
+        var text = Autosave._getText(this, true);
+        this.value = text;
+        Autosave.onPage = text != '';
     }
 };
 Autosave.reset = function () {
@@ -64,6 +68,7 @@ Autosave.reset = function () {
     $.each(json, function (key, value) {
         if (value.id == formId) {
             value.reset = true;
+            Autosave.onPage = false;
         }
     });
     window.localStorage.setItem(Autosave.storageName, JSON.stringify(json));
@@ -77,6 +82,7 @@ Autosave.remove = function (that) {
             if (index > -1) {
                 json.splice(index, 1);
             }
+            Autosave.onPage = false;
         }
     });
     window.localStorage.setItem(Autosave.storageName, JSON.stringify(json));
@@ -87,5 +93,10 @@ $(document).on('keyup', '.autosave-form textarea', Autosave.bind);
 $(document).on('reset', '.autosave-form', Autosave.reset);
 $(function () {
     $('.autosave-form textarea').each(Autosave.restore);
+});
+
+$(window).on('beforeunload', function () {
+    if (Autosave.onPage)
+        return "Возможно, внесенные изменения не сохранятся.";
 });
 
