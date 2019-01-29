@@ -1,13 +1,16 @@
-var Autosave = Autosave || {};
-Autosave.storageName = 'autosave';
-Autosave.formClass = '.autosave-form';
-Autosave.formAttr = 'data-autosave';
+var Autosave = {};
+
+Autosave.DEFAULTS = {
+    storageName: 'autosave',
+    formClass: '.autosave-form',
+    formAttr: 'data-autosave',
+    msgExit: 'Возможно, внесенные изменения не сохранятся.'
+};
 Autosave.onPage = false;
-Autosave.msgExit = 'Возможно, внесенные изменения не сохранятся.';
 
 Autosave._setItem = function (that) {
     var items = Autosave._getFullItem(),
-        formId = $(that).closest('form').attr(Autosave.formAttr),
+        formId = $(that).closest('form').attr(Autosave.DEFAULTS.formAttr),
         index = $(that).index(),
         found = false,
         text = that.value;
@@ -25,13 +28,13 @@ Autosave._setItem = function (that) {
     }
     Autosave.onPage = text !== '';
 
-    window.localStorage.setItem(Autosave.storageName, JSON.stringify(items));
+    window.localStorage.setItem(Autosave.DEFAULTS.storageName, JSON.stringify(items));
 };
 Autosave._getFullItem = function () {
-    return JSON.parse(window.localStorage.getItem(Autosave.storageName)) || [];
+    return JSON.parse(window.localStorage.getItem(Autosave.DEFAULTS.storageName)) || [];
 };
 Autosave._getText = function (that, reset) {
-    var formId = $(that).closest('form').attr(Autosave.formAttr),
+    var formId = $(that).closest('form').attr(Autosave.DEFAULTS.formAttr),
         index = $(that).index(),
         text = '';
 
@@ -67,18 +70,18 @@ Autosave.restore = function () {
 };
 Autosave.reset = function () {
     var json = Autosave._getFullItem(),
-        formId = $(this).closest('form').attr(Autosave.formAttr);
+        formId = $(this).closest('form').attr(Autosave.DEFAULTS.formAttr);
     $.each(json, function (key, value) {
         if (value.id === formId) {
             value.reset = true;
             Autosave.onPage = false;
         }
     });
-    window.localStorage.setItem(Autosave.storageName, JSON.stringify(json));
+    window.localStorage.setItem(Autosave.DEFAULTS.storageName, JSON.stringify(json));
 };
 Autosave.remove = function (that) {
     var json = Autosave._getFullItem(),
-        formId = $(that).attr(Autosave.formAttr);
+        formId = $(that).attr(Autosave.DEFAULTS.formAttr);
     $.each(json, function (key, value) {
         if (value)
             if (value.id === formId) {
@@ -89,25 +92,25 @@ Autosave.remove = function (that) {
                 Autosave.onPage = false;
             }
     });
-    window.localStorage.setItem(Autosave.storageName, JSON.stringify(json));
+    window.localStorage.setItem(Autosave.DEFAULTS.storageName, JSON.stringify(json));
 };
 
 Autosave.exitAjax = function () {
     if (Autosave.onPage)
-        if (confirm(Autosave.msgExit)) {
+        if (confirm(Autosave.DEFAULTS.msgExit)) {
             Autosave.onPage = false;
             return false;
         } else return true;
     else return false;
 };
 
-$(document).on('keyup', Autosave.formClass + ' textarea', Autosave.bind);
-$(document).on('reset', Autosave.formClass, Autosave.reset);
+$(document).on('keyup', Autosave.DEFAULTS.formClass + ' textarea', Autosave.bind);
+$(document).on('reset', Autosave.DEFAULTS.formClass, Autosave.reset);
 $(function () {
-    $(Autosave.formClass).has(':visible').find('textarea').each(Autosave.restore);
+    $(Autosave.DEFAULTS.formClass).has(':visible').find('textarea').each(Autosave.restore);
 });
 
 $(window).on('beforeunload', function () {
-    if (Autosave.onPage) return Autosave.msgExit;
+    if (Autosave.onPage) return Autosave.DEFAULTS.msgExit;
 });
 
