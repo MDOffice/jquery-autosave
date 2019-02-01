@@ -4,13 +4,10 @@
   "description": "",
   "author": "Kelatev",
   "license": "MIT",
-  "main": "gulpfile.js",
-  "directories": {
-    "example": "examples"
-  },
   "scripts": {
-    "build": "gulp default",
-    "deploy": "gulp scripts"
+    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js --open-page example/",
+    "start": "npm run dev",
+    "build": "webpack --config build/webpack.prod.conf.js"
   },
   "repository": {
     "type": "git",
@@ -26,15 +23,19 @@
   },
   "homepage": "https://github.com/kelatev/jquery-autosave#readme",
   "dependencies": {
+    "@babel/polyfill": "^7.2.5",
     "jquery": "^3.3.1"
   },
   "devDependencies": {
-    "del": "^3.0.0",
-    "gulp": "^4.0.0",
-    "gulp-concat": "^2.6.1",
-    "gulp-connect": "^5.5.0",
-    "gulp-csscomb": "^3.0.8",
-    "gulp-csso": "^2.0.0",
-    "gulp-uglify": "^2.1.2"
+    "@babel/core": "^7.2.2",
+    "@babel/plugin-transform-modules-umd": "^7.2.0",
+    "@babel/preset-env": "^7.3.1",
+    "babel-loader": "^8.0.5",
+    "expose-loader": "^0.7.5",
+    "path": "^0.12.7",
+    "webpack": "^4.29.0",
+    "webpack-cli": "^3.2.1",
+    "webpack-dev-server": "^3.1.14",
+    "webpack-merge": "^4.2.1"
   }
 }
