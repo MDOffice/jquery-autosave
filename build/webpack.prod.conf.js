@@ -9,8 +9,8 @@ module.exports = merge(baseWebpackConfig, {
 
     output: {
         path: path.resolve(__dirname, '../dist'),
-        filename: 'jquery.autosave-commonjs.js',
-        libraryTarget: 'commonjs'
+        filename: 'jquery.autosave-umd.js',
+        libraryTarget: 'umd'
     }
 
 });

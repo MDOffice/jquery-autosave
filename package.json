@@ -4,11 +4,6 @@
   "description": "",
   "author": "Kelatev",
   "license": "MIT",
-  "scripts": {
-    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js --open-page example/",
-    "start": "npm run dev",
-    "build": "webpack --config build/webpack.prod.conf.js"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kelatev/jquery-autosave.git"
@@ -22,6 +17,14 @@
     "url": "https://github.com/kelatev/jquery-autosave/issues"
   },
   "homepage": "https://github.com/kelatev/jquery-autosave#readme",
+  "scripts": {
+    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js --open-page example/",
+    "start": "npm run dev",
+    "unit": "jest --config test/unit/jest.conf.js --coverage",
+    "test": "npm run unit",
+    "lint": "eslint --ext .js src/js test/unit",
+    "build": "webpack --config build/webpack.prod.conf.js"
+  },
   "dependencies": {
     "@babel/polyfill": "^7.2.5",
     "jquery": "^3.3.1"
@@ -32,6 +35,7 @@
     "@babel/preset-env": "^7.3.1",
     "babel-loader": "^8.0.5",
     "expose-loader": "^0.7.5",
+    "jest": "^24.0.0",
     "path": "^0.12.7",
     "webpack": "^4.29.0",
     "webpack-cli": "^3.2.1",
