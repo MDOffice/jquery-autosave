@@ -8,6 +8,7 @@
     ]
   ],
   "plugins": [
-    "@babel/transform-modules-umd"
+    "add-module-exports"
+    /*"@babel/transform-modules-umd"*/
   ]
 }

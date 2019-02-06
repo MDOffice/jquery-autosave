@@ -1,7 +1,4 @@
 **/*.min.js
 **/dist/
-**/vendor/
-**/vendor-locales/
 /_gh_pages/
-/js/coverage/
-/package.js
+test
