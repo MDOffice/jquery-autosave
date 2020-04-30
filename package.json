@@ -30,7 +30,7 @@
     "build": "webpack --config build/webpack.prod.conf.js"
   },
   "dependencies": {
-    "jquery": "^3.4.1"
+    "jquery": "^3.5.0"
   },
   "devDependencies": {
     "@babel/core": "^7.7.7",
