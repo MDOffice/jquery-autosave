@@ -36,15 +36,15 @@
     "@babel/core": "^7.12.10",
     "@babel/plugin-transform-modules-umd": "^7.12.1",
     "@babel/polyfill": "^7.12.1",
-    "@babel/preset-env": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
     "babel-loader": "^8.2.2",
     "babel-plugin-add-module-exports": "^1.0.4",
-    "expose-loader": "^0.7.5",
+    "expose-loader": "^1.0.3",
     "jest": "^26.6.3",
     "path": "^0.12.7",
-    "webpack": "^4.44.2",
-    "webpack-cli": "^3.3.12",
+    "webpack": "^5.10.3",
+    "webpack-cli": "^4.2.0",
     "webpack-dev-server": "^3.11.0",
-    "webpack-merge": "^4.2.2"
+    "webpack-merge": "^5.7.0"
   }
 }
