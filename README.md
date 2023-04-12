@@ -13,8 +13,7 @@ Publish (auto)
 -----------
 ```bash
 npm version patch
-git push origin
-git push --tags
+git push origin --tags
 ```
  - [Make release with last tag](https://github.com/MDOffice/jquery-autosave/releases/new)
  - [Wait to finish build and publish](https://github.com/MDOffice/jquery-autosave/actions)
@@ -26,8 +25,7 @@ Publish (manual)
 npm ci
 npm run build
 npm version patch
-git push origin
-git push --tags
+git push origin --tags
 npm adduser --registry=https://registry.npmjs.org //if first
 npm publish
 ```
